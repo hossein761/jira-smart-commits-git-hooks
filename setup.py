@@ -1,2 +1,3 @@
 from setuptools import setup
-setup()
+
+setup(packages=['pre_commit_hooks'])
