@@ -1,0 +1,5 @@
+- id: commit-message-check
+  name: Check Commit Message
+  description: Checks if the commit message follows the patterns.
+  entry: commit-message-checker
+  language: python
