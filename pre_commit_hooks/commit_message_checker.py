@@ -1,8 +1,7 @@
-import datetime
 import re
 import sys
-from math import floor
 from subprocess import check_output
+
 from typing import Optional
 
 
@@ -28,6 +27,9 @@ def extract_jira_issue_key(message: str) -> Optional[str]:
 def main():
     # Verify that the branch name is a Jira issue key.
     git_branch_name = current_git_branch_name()
+    if git_branch_name == 'master':
+        print('You are not allowed to commit/push to the master branch!')
+        sys.exit(1)
     jira_issue_key = extract_jira_issue_key(git_branch_name)
     if not jira_issue_key:
         exit_with_error(
