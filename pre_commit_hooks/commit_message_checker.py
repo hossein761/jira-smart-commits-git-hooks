@@ -38,23 +38,14 @@ def main():
 
     # Read the commit message.
     commit_msg_filepath = sys.argv[1]
-    print('args: ', sys.argv)
     with open(commit_msg_filepath, 'r') as f:
         commit_msg = f.read()
 
-    # Replace the default multiline commit message.
-    default_commit_msg = 'Please enter the commit message for your changes.' in commit_msg
-    if default_commit_msg:
-        commit_msg = '''
-        d$:<If applied, this commit will "Open the pod bay doors">
-        d$:<What does this commit do, and why?>
-        '''.strip()
 
     # Split the commit into a subject and body and apply some light formatting.
     commit_elements = commit_msg.split('\n', maxsplit=1)
     commit_subject = commit_elements[0].strip()
-    if not default_commit_msg:
-        commit_subject.capitalize()
+    commit_subject.capitalize()
     commit_subject = re.sub(r'\.+$', '', commit_subject)
     commit_body = None if len(commit_elements) == 1 else commit_elements[1]
     commit_body = commit_body.strip()
