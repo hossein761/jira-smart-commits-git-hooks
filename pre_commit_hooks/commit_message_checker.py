@@ -37,7 +37,9 @@ def main():
             f'issue key with:\n$ git branch -m {git_branch_name} <KEY-123>')
 
     # Read the commit message.
-    commit_msg_filepath = sys.argv[1]
+    commit_msg_filepath = sys.argv[0]
+    print (sys.argv[0])
+    print(sys.argv[1])
     with open(commit_msg_filepath, 'r') as f:
         commit_msg = f.read()
 
