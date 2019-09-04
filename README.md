@@ -19,5 +19,5 @@ repos:
   rev: c950754ec6c772641957616f1126642ec67c4a9f
   hooks:
   - id: commit-message-check
-    stages: ['commit-msg']
+    stages: ['prepare-commit-msg']
 `
