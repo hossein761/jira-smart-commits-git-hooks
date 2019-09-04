@@ -38,8 +38,9 @@ def main():
 
     # Read the commit message.
     commit_msg_filepath = sys.argv[0]
-    print (sys.argv[0])
-    print(sys.argv[1])
+    print('arg 0: ', sys.argv[0])
+    print('arg 1: ', sys.argv[1])
+    print('args: ', sys.argv)
     with open(commit_msg_filepath, 'r') as f:
         commit_msg = f.read()
 
