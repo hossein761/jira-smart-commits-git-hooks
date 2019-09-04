@@ -47,6 +47,7 @@ def main():
     commit_subject = commit_elements[0].strip()
     commit_subject = commit_subject.capitalize()
     commit_subject = re.sub(r'\.+$', '', commit_subject)
+    commit_body = commit_elements[1].strip()
 
     # Build the new commit message:
 
@@ -58,7 +59,7 @@ def main():
     if not extract_jira_issue_key(commit_subject):
         commit_subject = f'{jira_issue_key} {commit_subject}'
     # Assemble the commit message as the subject plus body.
-    commit_msg = f'{commit_subject}'
+    commit_msg = f'{commit_subject}\n\n{commit_body}'
     # 3. Override commit message.
     with open(commit_msg_filepath, 'w') as f:
         f.write(commit_msg)
