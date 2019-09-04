@@ -38,8 +38,6 @@ def main():
 
     # Read the commit message.
     commit_msg_filepath = sys.argv[0]
-    print('arg 0: ', sys.argv[0])
-    print('arg 1: ', sys.argv[1])
     print('args: ', sys.argv)
     with open(commit_msg_filepath, 'r') as f:
         commit_msg = f.read()
@@ -66,6 +64,12 @@ def main():
         commit_body = f'{jira_issue_key} #comment {commit_body}'
     # 2. Add the time worked to the Work Log in the commit body.
     if '#time' not in commit_msg:
+        if 'Open the pod bay doors' in commit_subject:
+            log = 'Open the pod bay doors'
+        else:
+            log = commit_subject
+        log = f'{jira_issue_key} #time {time_worked_on_commit()} {log}'
+        commit_body = f'{commit_body}\n\n{log}' if commit_body else log
         exit_with_error(f'You forgot to register the hours you worked on this commit.'
                         f'Use the #time command from JIRA smart commits to do so.')
     # 3. Make sure the subject starts with a Jira issue key.
