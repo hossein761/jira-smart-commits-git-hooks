@@ -45,24 +45,21 @@ def main():
     # Split the commit into a subject and body and apply some light formatting.
     commit_elements = commit_msg.split('\n', maxsplit=1)
     commit_subject = commit_elements[0].strip()
-    commit_subject.capitalize()
+    commit_subject = commit_subject.capitalize()
     commit_subject = re.sub(r'\.+$', '', commit_subject)
-    commit_body = None if len(commit_elements) == 1 else commit_elements[1]
-    commit_body = commit_body.strip()
+
     # Build the new commit message:
-    # 1. If there is a body, turn it into a comment on the issue.
-    if '#comment' not in commit_msg and commit_body:
-        commit_body = f'{jira_issue_key} #comment {commit_body}'
-    # 2. Add the time worked to the Work Log in the commit body.
+
+    # 1. Add the time worked to the Work Log in the commit body.
     if '#time' not in commit_msg:
         exit_with_error(f'You forgot to register the hours you worked on this commit.'
                         f'Use the #time command from JIRA smart commits to do so.')
-    # 3. Make sure the subject starts with a Jira issue key.
+    # 2. Make sure the subject starts with a Jira :issue key.
     if not extract_jira_issue_key(commit_subject):
         commit_subject = f'{jira_issue_key} {commit_subject}'
     # Assemble the commit message as the subject plus body.
-    commit_msg = f'{commit_subject}\n\n{commit_body}'
-    # Override commit message.
+    commit_msg = f'{commit_subject}'
+    # 3. Override commit message.
     with open(commit_msg_filepath, 'w') as f:
         f.write(commit_msg)
 
